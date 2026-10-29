@@ -24,6 +24,8 @@
         public double ProsecnaOcena { get; set; }
 
         public List<string> ListaZelja { get; set; } = new List<string>();
+
+        public List<Kupovina> Kupovine { get; set; } = new List<Kupovina>();
     }
 
 }
