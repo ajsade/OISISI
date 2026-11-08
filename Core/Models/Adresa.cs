@@ -9,7 +9,7 @@
 
         public override string ToString()
         {
-            return $"{Ulica} {Broj}, {Grad}";
+            return $"{Ulica} {Broj}, {Grad}"; 
         }
     }
   
