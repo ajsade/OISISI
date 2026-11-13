@@ -27,7 +27,7 @@ while (!kraj)
     switch (izbor)
     {
         case "1":
-            posetilacController.PrikaziSve();
+            posetilacController.Meni();
             break;
         case "2":
             Console.WriteLine("(izdavaci - uskoro)");
