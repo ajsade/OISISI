@@ -27,10 +27,14 @@ namespace ConsoleClient.Controllers
                 return;
             }
 
-            foreach(Izdavac i in izdavaci)
+            foreach (Izdavac i in izdavaci)
             {
-                //ako ima onda foric prodje kroz svakog izdavaca i ipsie mu sifru i naziv
-                Console.WriteLine($"{i.Sifra} | {i.Naziv}");
+                Console.WriteLine($"Sifra: {i.Sifra}");
+                Console.WriteLine($"  Naziv: {i.Naziv}");
+                Console.WriteLine($"  Sef (Id autora): {(i.SefId.HasValue ? i.SefId.Value.ToString() : "nije postavljen")}");
+                Console.WriteLine($"  Broj autora: {i.AutorIds.Count}");
+                Console.WriteLine($"  Broj knjiga: {i.KnjigaIsbns.Count}");
+                Console.WriteLine();
             }
         }
 
