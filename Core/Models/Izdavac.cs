@@ -2,7 +2,7 @@
 {
     public class Izdavac
     {
-        /*Списак књига*/
+      
         public string Sifra { get; set; } = string.Empty;
 
         public string Naziv {  get; set; } = string.Empty;

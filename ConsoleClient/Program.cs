@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using Core.DAO;
+﻿using Core.DAO;
 using Core.Services;
 using ConsoleClient.Controllers;
 
@@ -24,7 +23,7 @@ while (!kraj)
     Console.WriteLine("1. Posetioci");
     Console.WriteLine("2. Izdavaci");
     Console.WriteLine("0. Izlaz");
-    Console.WriteLine("Izbor: ");
+    Console.Write("Izbor: ");
     string? izbor = Console.ReadLine();
     //ceka da korisnil unese red i pritisne enter, pa vraca ono sto je on ukucao
 
