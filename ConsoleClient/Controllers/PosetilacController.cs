@@ -71,6 +71,98 @@ namespace ConsoleClient.Controllers
             Console.WriteLine("Posetilac je dodat."); //ako nije bilo greske , return nije prekinuo metodu pa je posjetilac uspjesno dodat
         }
 
+        public void Izmijeni()
+        {
+            Console.WriteLine("--- Izmjena posetioca ---");
+
+            int id = Unos.ProcitajCijeliBroj("Id posetioca: ");
+            //korisnik ukuca broj posjetioca i to vidi u ipsisu prikazi sve je je id prva kolona
+            Posetilac? posetilac = _service.GetById(id);
+            //pita servis za posjetioca sa tim brojem
+
+            if (posetilac == null)
+            {
+                Console.WriteLine("Posetilac nije pronadjen.");
+                return;
+            }
+
+            Console.WriteLine($"Mijenjate: {posetilac.Ime} {posetilac.Prezime}");
+            //stavila sam {} da je ljepse tj da korsnik vidi koga mienja, ugl  stavr ispisa
+
+            Posetilac izmijenjen = new Posetilac();
+            //novi objekat mora imati isti id,jer po njemu dao zna koga miejnja u listi, da update ne bi mislio da je neki drugi
+
+            izmijenjen.Id = posetilac.Id;
+            izmijenjen.ProsecnaOcena = posetilac.ProsecnaOcena; //prepisujemo
+            izmijenjen.Kupovine = posetilac.Kupovine;
+            izmijenjen.ListaZelja = posetilac.ListaZelja;
+
+
+            //polja koja unosi referent se citaju preko Unosa, isto kao pri dodavanju
+            izmijenjen.BrojClanskeKarte = Unos.ProcitajTekst("Broj clanske karte: ");
+            izmijenjen.Ime = Unos.ProcitajTekst("Ime: ");
+            izmijenjen.Prezime = Unos.ProcitajTekst("Prezime: ");
+            izmijenjen.DatumRodjenja = Unos.ProcitajDatum("Datum rodjenja");
+
+            izmijenjen.KontaktTelefon = Unos.ProcitajTekst("Kontakt telefon: ");
+            izmijenjen.Email = Unos.ProcitajTekst("E-mail: ");
+
+            izmijenjen.Adresa.Ulica = Unos.ProcitajTekst("Ulica: ");
+            izmijenjen.Adresa.Broj = Unos.ProcitajTekst("Broj: ");
+            izmijenjen.Adresa.Grad = Unos.ProcitajTekst("Grad: ");
+            izmijenjen.Adresa.Drzava = Unos.ProcitajTekst("Drzava: ");
+
+            izmijenjen.TrenutnaGodinaClanstva = Unos.ProcitajCijeliBroj("Trenutna godina clanstva: ");
+            izmijenjen.Status = Unos.ProcitajStatus();
+
+            string? greska = _service.Update(izmijenjen);//saljemo servisu novi objekat
+            //servis prvo provjeri poravila pa onda zove dao, koji zamijeni starog posjetioca novim i upise u fajl
+            if (greska != null)
+            {
+                Console.WriteLine("Greska: " + greska);
+                return;
+            }
+
+            Console.WriteLine("Posetilac je izmijenjen.");
+
+        }
+
+        public void Obrisi()
+        {
+            Console.WriteLine("--- Brisanje posetioca ---");
+
+            int id = Unos.ProcitajCijeliBroj("Id posetioca: ");
+            //Prvi dio je isti kao kod izmjene: korisnik ukuca Id,
+            //servis pronađe posjetioca, a ako ga nema, ispiše se poruka i return prekida metodu.
+            Posetilac? posetilac = _service.GetById(id);
+
+            if (posetilac == null)
+            {
+                Console.WriteLine("Posetilac nije pronadjen.");
+                return;
+            }
+
+            Console.Write($"Da li ste sigurni da zelite da obrisete {posetilac.Ime} {posetilac.Prezime}? (d/n): ");
+            string? odgovor = Console.ReadLine();
+
+            if (odgovor != "d")
+            {
+                Console.WriteLine("Brisanje otkazano.");
+                return;
+                //ako kornisk ukuca bilo sta osim d brisanje se otkazuje
+            }
+
+            bool obrisan = _service.Delete(id);
+            if (obrisan)
+            {
+                Console.WriteLine("Posetilac je obrisan.");
+            }
+            else
+            {
+                Console.WriteLine("Brisanje nije uspjelo.");
+            }
+        }
+
         public void Meni()
         {
             bool nazad = false; //dok korisnik ne odabere nulu
@@ -80,6 +172,8 @@ namespace ConsoleClient.Controllers
                 Console.WriteLine("--- POSETIOCI ---");
                 Console.WriteLine("1. Prikazi sve");
                 Console.WriteLine("2. Dodaj");
+                Console.WriteLine("3. Izmijeni");
+                Console.WriteLine("4. Obrisi");
                 Console.WriteLine("0. Nazad");
                 Console.Write("Izbor: ");
                 string? izbor = Console.ReadLine();
@@ -91,6 +185,12 @@ namespace ConsoleClient.Controllers
                         break;
                     case "2":
                         Dodaj();
+                        break;
+                    case "3":
+                        Izmijeni();
+                        break;
+                    case "4":
+                        Obrisi();
                         break;
                     case "0":
                         nazad = true;
