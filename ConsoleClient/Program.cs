@@ -11,6 +11,8 @@ var izdavacService = new IzdavacService(new IzdavacDao());
 //mjesto gdje sastavkjm koznolu servis dao fajl
 
 var posetilacController = new PosetilacController(posetilacService);
+var izdavacController = new IzdavacController(izdavacService);
+
 
 bool kraj = false;
 while (!kraj)
@@ -30,7 +32,7 @@ while (!kraj)
             posetilacController.Meni();
             break;
         case "2":
-            Console.WriteLine("(izdavaci - uskoro)");
+            izdavacController.Meni();
             break;
         case "0":
             kraj = true;
