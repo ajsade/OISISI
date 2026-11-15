@@ -27,7 +27,7 @@ namespace ConsoleClient.Utils
         {
             while (true)
             {
-                Console.Write(poruka + " (dd.MM.yyyy): ");
+                Console.Write(poruka + " (dd.MM.yyyy.): ");
                 string ? unos = Console.ReadLine();
                                                       // CultureInfo.InvariantCulture kaze da se format ne mijenja u zavisnosti jezika, pa radi isto na svakom racunara, zato je dodat System.Globalization
                 if (DateTime.TryParseExact(unos,"dd.MM.yyyy",CultureInfo.InvariantCulture,DateTimeStyles.None,out DateTime datum)) //DateTimeStyles.none jer ne zelimo dodatna podesavanja,

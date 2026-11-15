@@ -25,10 +25,20 @@ namespace ConsoleClient.Controllers
                 return;
             }
 
-            foreach (Posetilac p in posetioci)
+                       foreach (Posetilac p in posetioci)
             {
-                Console.WriteLine($"{p.Id} | {p.BrojClanskeKarte} | {p.Ime} {p.Prezime} | {p.Status} | {p.Adresa}");
-
+                Console.WriteLine($"Id: {p.Id}");
+                Console.WriteLine($"  Broj clanske karte: {p.BrojClanskeKarte}");
+                Console.WriteLine($"  Ime i prezime: {p.Ime} {p.Prezime}");
+                Console.WriteLine($"  Datum rodjenja: {p.DatumRodjenja:dd.MM.yyyy.}");
+                Console.WriteLine($"  Adresa: {p.Adresa}, {p.Adresa.Drzava}");
+                Console.WriteLine($"  Telefon: {p.KontaktTelefon}");
+                Console.WriteLine($"  E-mail: {p.Email}");
+                Console.WriteLine($"  Godina clanstva: {p.TrenutnaGodinaClanstva}");
+                Console.WriteLine($"  Status: {p.Status}");
+                Console.WriteLine($"  Prosjecna ocjena: {p.ProsecnaOcena}");
+                Console.WriteLine($"  Kupovina: {p.Kupovine.Count}, na listi zelja: {p.ListaZelja.Count}");
+                Console.WriteLine();
             }
         }
 
