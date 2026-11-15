@@ -3,6 +3,8 @@ using Core.DAO;
 using Core.Services;
 using ConsoleClient.Controllers;
 
+Console.OutputEncoding = System.Text.Encoding.UTF8;
+
 var posetilacService = new PosetilacService(new PosetilacDao());
 //pisemo var da komapjler zakljuci tip
 //pravi DAO koji pri nastanku ucita  posetioci.json (desriajlizacijs)
