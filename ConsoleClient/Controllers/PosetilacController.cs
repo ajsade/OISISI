@@ -152,14 +152,12 @@ namespace ConsoleClient.Controllers
                 return;
             }
 
-            Console.Write($"Da li ste sigurni da zelite da obrisete {posetilac.Ime} {posetilac.Prezime}? (d/n): ");
-            string? odgovor = Console.ReadLine();
+            bool potvrda = Unos.ProcitajDaNe($"Da li ste sigurni da zelite da obrisete {posetilac.Ime} {posetilac.Prezime}?");
 
-            if (odgovor != "d")
+            if (!potvrda)
             {
                 Console.WriteLine("Brisanje otkazano.");
                 return;
-                //ako kornisk ukuca bilo sta osim d brisanje se otkazuje
             }
 
             bool obrisan = _service.Delete(id);

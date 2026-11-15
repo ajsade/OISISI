@@ -115,10 +115,9 @@ namespace ConsoleClient.Controllers
             }
 
 
-            Console.Write($"Da li ste sigurni da zelite da obrisete {izdavac.Naziv}? (d/n): ");
-            string? odgovor = Console.ReadLine();
+            bool potvrda = Unos.ProcitajDaNe($"Da li ste sigurni da zelite da obrisete {izdavac.Naziv}?");
 
-            if (odgovor != "d")
+            if (!potvrda)
             {
                 Console.WriteLine("Brisanje otkazano.");
                 return;

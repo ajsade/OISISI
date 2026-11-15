@@ -28,9 +28,10 @@ namespace Core.Services
          
         public string? Add(Posetilac posetilac)  //vraca poruku o gresci, ako vrati null sve je u redu
         {
-            if (string.IsNullOrWhiteSpace(posetilac.BrojClanskeKarte)) //da li je prazno, ako da baca gresku
-            {  
-                return "Broj članske karte je obavezan.";
+            string? greska = Validiraj(posetilac);
+            if (greska != null)
+            {
+                return greska;
             }
 
             bool postoji = _dao.GetAll().Any(p => p.BrojClanskeKarte == posetilac.BrojClanskeKarte);
@@ -48,9 +49,10 @@ namespace Core.Services
 
         public string? Update(Posetilac posetilac)
         {
-            if (string.IsNullOrWhiteSpace(posetilac.BrojClanskeKarte))
+            string? greska = Validiraj(posetilac);
+            if (greska != null)
             {
-                return "Broj članske karte je obavezan.";
+                return greska;
             }
 
             bool zauzet = _dao.GetAll().Any(p => p.BrojClanskeKarte == posetilac.BrojClanskeKarte && p.Id != posetilac.Id);
@@ -67,6 +69,34 @@ namespace Core.Services
         public bool Delete(int id)
         {
             return _dao.Delete(id);
+        }
+
+        private string? Validiraj(Posetilac posetilac)
+        {
+            if (string.IsNullOrWhiteSpace(posetilac.BrojClanskeKarte))
+            {
+                return "Broj članske karte je obavezan.";
+            }
+
+            int at = posetilac.Email.IndexOf('@');
+            int tacka = at < 0 ? -1 : posetilac.Email.IndexOf('.', at);
+
+            if (at <= 0 || tacka < at + 2 || tacka == posetilac.Email.Length - 1)
+            {
+                return "E-mail adresa nije ispravna.";
+            }
+
+            if (posetilac.TrenutnaGodinaClanstva <= 0)
+            {
+                return "Godina članstva mora biti veća od nule.";
+            }
+
+            if (posetilac.DatumRodjenja > DateTime.Today)
+            {
+                return "Datum rođenja ne može biti u budućnosti.";
+            }
+
+            return null;
         }
 
     }

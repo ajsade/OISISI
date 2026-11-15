@@ -29,12 +29,12 @@ namespace ConsoleClient.Utils
             {
                 Console.Write(poruka + " (dd.MM.yyyy.): ");
                 string ? unos = Console.ReadLine();
-                                                      // CultureInfo.InvariantCulture kaze da se format ne mijenja u zavisnosti jezika, pa radi isto na svakom racunara, zato je dodat System.Globalization
-                if (DateTime.TryParseExact(unos,"dd.MM.yyyy",CultureInfo.InvariantCulture,DateTimeStyles.None,out DateTime datum)) //DateTimeStyles.none jer ne zelimo dodatna podesavanja,
-                                                                                                                                   //OUT popuni promenjjivu koju smo napravuli
-               //korisnik vidi u kom formatu d aunese ispravno
-              //TryParseExact pokusava da pretvori ukucani tekst u datum tacno po formatu
-              //program u slucaju neuspjeha nece pasti na pogresan unos, nego se samo javi false
+                // CultureInfo.InvariantCulture kaze da se format ne mijenja u zavisnosti jezika, pa radi isto na svakom racunara, zato je dodat System.Globalization
+                if (DateTime.TryParseExact(unos, new[] { "dd.MM.yyyy.", "dd.MM.yyyy" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime datum)) //DateTimeStyles.none jer ne zelimo dodatna podesavanja,
+                                                                                                                                                                //OUT popuni promenjjivu koju smo napravuli
+                                                                                                                                                                //korisnik vidi u kom formatu d aunese ispravno
+                                                                                                                                                                //TryParseExact pokusava da pretvori ukucani tekst u datum tacno po formatu
+                                                                                                                                                                //program u slucaju neuspjeha nece pasti na pogresan unos, nego se samo javi false
                 {
                     return datum;
                 }
@@ -77,6 +77,27 @@ namespace ConsoleClient.Utils
                 }
 
                 Console.WriteLine("Unesite 1 ili 2.");
+            }
+        }
+
+        public static bool ProcitajDaNe(string poruka)
+        {
+            while (true)
+            {
+                Console.Write(poruka + " (da/ne): ");
+                string? unos = Console.ReadLine();
+
+                if (string.Equals(unos?.Trim(), "da", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+
+                if (string.Equals(unos?.Trim(), "ne", StringComparison.OrdinalIgnoreCase))
+                {
+                    return false;
+                }
+
+                Console.WriteLine("Unesite da ili ne.");
             }
         }
     }
