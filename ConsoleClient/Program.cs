@@ -11,8 +11,16 @@ var izdavacService = new IzdavacService(new IzdavacDao());
 //predajemo servisu DAO kroz kontruktor
 //mjesto gdje sastavkjm koznolu servis dao fajl
 
+//A
+var autorService = new AutorService(new AutorDao());
+var knjigaService = new KnjigaService(new KnjigaDao());
+
 var posetilacController = new PosetilacController(posetilacService);
 var izdavacController = new IzdavacController(izdavacService);
+
+//A
+var autorController = new AutorController(autorService);
+var knjigaController = new KnjigaController(knjigaService);
 
 
 bool kraj = false;
@@ -22,6 +30,8 @@ while (!kraj)
     Console.WriteLine("=== SAJAM KNJIGA ===");
     Console.WriteLine("1. Posetioci");
     Console.WriteLine("2. Izdavaci");
+    Console.WriteLine("3. Autori");
+    Console.WriteLine("4. Knjige");
     Console.WriteLine("0. Izlaz");
     Console.Write("Izbor: ");
     string? izbor = Console.ReadLine();
@@ -34,6 +44,13 @@ while (!kraj)
             break;
         case "2":
             izdavacController.Meni();
+            break;
+        case "3":
+            autorController.Meni();
+            break;
+
+        case "4":
+            knjigaController.Meni();
             break;
         case "0":
             kraj = true;
