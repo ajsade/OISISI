@@ -72,6 +72,15 @@ namespace Core.Services
             if (string.IsNullOrWhiteSpace(autor.BrojLicneKarte))
                 return "Broj licne karte je obavezan.";
 
+            int at = autor.Email.IndexOf('@');
+            int tacka = at < 0 ? -1 : autor.Email.IndexOf('.', at);
+
+            if (at <= 0 || tacka < at + 2 ||
+                tacka == autor.Email.Length - 1)
+            {
+                return "E-mail adresa nije ispravna.";
+            }
+
             if (autor.GodineIskustva < 0)
                 return "Godine iskustva ne mogu biti negativne.";
 
