@@ -1,21 +1,22 @@
 ﻿using Core.Interfaces; //zbog interfejsa kog klasa implementira
 using Core.Models;  //treba nam zbog posjetioca
-using Core.Utils; //treba nam jer je tu smjesten JsonStorage
+using Core.Storage;
 
 namespace Core.DAO //"adresa"klase
 {
     public class PosetilacDao : IPosetilacDao //implementira ovaj interfejs
     {
-        private const string FileName = "posetioci.json";
-        //ime fajla u koji cemo da upisujemo posjetioce
-        private readonly List<Posetilac> _posetioci;
-        //lista sa objektima tipa Posjetilac, _posetioci je ime promjelnjive
         
+        private readonly List<Posetilac> _posetioci;
+        private readonly Storage<Posetilac> _storage;
+        //lista sa objektima tipa Posjetilac, _posetioci je ime promjelnjive
+
         public PosetilacDao() //kontruktor, priprema listu
         {
-            _posetioci = JsonStorage.Load<Posetilac>(FileName);
-        //<Posetilac> kaze metodi koji tip objekta da pravi od jsona
-        //deserijalizacijac
+            _storage = new Storage<Posetilac>("posetioci.txt");
+            _posetioci = _storage.Load();
+            //<Posetilac> kaze metodi koji tip objekta da pravi od jsona
+            //deserijalizacijac
         }
 
         public List<Posetilac> GetAll() //public da je mogu zvati servisi, konzola..
@@ -33,8 +34,8 @@ namespace Core.DAO //"adresa"klase
 
         private void Save()
         {
-            JsonStorage.Save(FileName, _posetioci);
-            //da ime fajla i listu metodi a ona je pretvori u JSON, tj serijalizacija i upise u fajl
+            _storage.Save(_posetioci);
+           
         }
 
         public void Add(Posetilac posetilac) //primi jednog posjetioca kog konza napravi iz unosa
