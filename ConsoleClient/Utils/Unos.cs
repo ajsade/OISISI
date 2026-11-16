@@ -7,19 +7,25 @@ namespace ConsoleClient.Utils
         //poput kutije sa pomocnim alatima za citanje sa tastature
     {
         public static string ProcitajTekst(string poruka)
-            //prima pitanjekoje treba ispisati i vraca ono sto krosnik ukuca
         {
             while (true)
             {
-                Console.Write(poruka);//ispise pitanje
-                string? unos = Console.ReadLine();//ceka odgovor
+                Console.Write(poruka);
+                string? unos = Console.ReadLine();
 
-                if (!string.IsNullOrWhiteSpace(unos))
+                if (string.IsNullOrWhiteSpace(unos))
                 {
-                    return unos.Trim(); //skidamo suvisne razmake s pocetka i kraja
+                    Console.WriteLine("Polje ne smije biti prazno.");
+                    continue;
                 }
 
-                Console.WriteLine("Polje ne smije biti prazno.");
+                if (unos.Contains('|'))
+                {
+                    Console.WriteLine("Znak | nije dozvoljen.");
+                    continue;
+                }
+
+                return unos.Trim();
             }
         }
 
