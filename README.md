@@ -23,8 +23,16 @@ Projekat iz predmeta Osnovi informacionih sistema i softverskog inzenjerstva.
 
 ### Ajsa Demirovic
 
-- (dopunjava koleginica)
+- Modeli: `Autor`, `Knjiga`, `Adresa`
+- Interfejsi i DAO: `IAutorDao`, `AutorDao`, `IKnjigaDao`, `KnjigaDao`
+- Servisi: `AutorService`, `KnjigaService`
+- Cuvanje podataka: implementirane metode ToCSV i FromCSV
+  za klase Autor i Knjiga, uz koriscenje postojecegsistema Serializer i Storage (tekstualni format sa separatorom |)
+- Serijalizacija i deserijalizacija autora i knjiga
+- Konzola: `AutorController`, `KnjigaController`
+- Funkcionalnosti: dodavanje, izmena, brisanje i prikaz autora i knjiga, cuvanje i ucitavanje podataka iz tekstualnih datoteka
+
 
 ## Pokretanje
 
-Postaviti `ConsoleClient` kao startup projekat i pokrenuti. Podaci se cuvaju u folderu `Data` u korijenu projekta (`posetioci.txt`, `izdavaci.txt`).
+Postaviti `ConsoleClient` kao startup projekat i pokrenuti. Podaci se cuvaju u folderu `Data` u korijenu projekta (`posetioci.txt`, `izdavaci.txt`, `autori.txt`, `knjige.txt`).
