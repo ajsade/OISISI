@@ -1,0 +1,2 @@
+1|4|Vanja|Samardzic|2004-10-24|Bulevar Oslobodjenja|1|Novi Sad|Srbija|0666666|vsamardzic4444@gmail.com|2|Redovan|0|
+2|6|Ajsa|Demirovic|2002-08-05|Trg Dositeja Obradovica|10|Novi Sad|Srbija|06666666666|ajsa@yahoo.com|3|Vip|0|
