@@ -15,10 +15,10 @@ Projekat iz predmeta Osnovi informacionih sistema i softverskog inzenjerstva.
 - Modeli :  `Posetilac`, `Kupovina`, `Izdavac`, `StatusPosetioca`
 - Interfejsi i DAO: `IPosetilacDao`, `PosetilacDao`, `IIzdavacDao`, `IzdavacDao`
 - Servisi: `PosetilacService`, `IzdavacService`
-- Pomocna klasa za serijalizaciju: `JsonStorage` (Load i Save u JSON)
+- Cuvanje podataka: `ISerializable`, `Serializer`, `Storage` (tekstualni format sa separatorom `|`, po uzoru na 3. vjezbe)
 - Konzola: glavni meni, `PosetilacController`, `IzdavacController`, `Unos`
 - Funkcionalnosti: dodavanje, izmjena, brisanje i prikaz posjetilaca i izdavaca,
-  cuvanje i ucitavanje podataka iz JSON fajlova
+  cuvanje i ucitavanje podataka iz tekstualnih fajlova
 
 
 ### Ajsa Demirovic
@@ -27,5 +27,4 @@ Projekat iz predmeta Osnovi informacionih sistema i softverskog inzenjerstva.
 
 ## Pokretanje
 
-Postaviti `ConsoleClient` kao startup projekat i pokrenuti. Podaci se cuvaju u
-folderu `Data` pored izvrsnog fajla (`posetioci.json`, `izdavaci.json`).
+Postaviti `ConsoleClient` kao startup projekat i pokrenuti. Podaci se cuvaju u folderu `Data` u korijenu projekta (`posetioci.txt`, `izdavaci.txt`).
