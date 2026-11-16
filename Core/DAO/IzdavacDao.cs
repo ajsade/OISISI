@@ -1,17 +1,20 @@
 ﻿using Core.Interfaces;
 using Core.Models;
-using Core.Utils;
+using Core.Storage;
 
 namespace Core.DAO
 {
     public class IzdavacDao : IIzdavacDao
     {
-        private const string FileName = "izdavaci.json"; //izdavaci idu u svoj fajl, odvojeni od posjetilaca, da se ne bi mejdusobno prepisivbali
+       
         private readonly List<Izdavac> _izdavaci;
+
+        private readonly Storage<Izdavac> _storage;
 
         public IzdavacDao()
         {
-            _izdavaci = JsonStorage.Load<Izdavac>(FileName);
+            _storage = new Storage<Izdavac>("izdavaci.txt");
+            _izdavaci = _storage.Load();
         }
 
         public List<Izdavac> GetAll() //vraca kopiju liste, da niko izvana ne mijenja nasu internu listu mimo Add i Delete
@@ -26,7 +29,7 @@ namespace Core.DAO
 
         private void Save() //upise listu izdavaca u izdavaci,json (serijalizacija)
         {
-            JsonStorage.Save(FileName, _izdavaci);
+            _storage.Save(_izdavaci);
         }
 
 
